@@ -1,33 +1,37 @@
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 from gettext import find
 from xml.dom.minidom import Element
 from selenium import webdriver
 import time
 from selenium.webdriver.common.keys import Keys
 
-options = webdriver.ChromeOptions()
-options.add_experimental_option('excludeSwitches', ['enable-logging'])
-driver = webdriver.Chrome(options=options)
-driver.get("https://app.market4u.com.br/")
-driver.maximize_window()
+servico = Service(ChromeDriverManager().install())
+navegador = webdriver.Chrome(service=servico)
+navegador.get("https://app.market4u.com.br/")
+navegador.maximize_window()
+
 time.sleep(20)
-driver.find_element("xpath", '//*[@id="s2id_box_licenciado"]/a/span[1]').click()
+navegador.find_element("xpath", '//*[@id="s2id_box_licenciado"]/a/span[1]').click()
 time.sleep(2)
-driver.find_element("xpath", '//*[@id="select2-drop"]/div/input').send_keys('144')
+navegador.find_element("xpath", '//*[@id="select2-drop"]/div/input').send_keys('205')
 time.sleep(2)
-driver.find_element("xpath", '//*[@id="select2-drop"]/ul/li/ul/li/div').click()
+navegador.find_element("xpath", '//*[@id="select2-drop"]/ul/li/ul/li/div').click()
 time.sleep(2)
-driver.find_element("xpath", '//*[@id="main-menu-wrapper"]/ul/li[7]/a/span[2]').click()
+navegador.find_element("xpath", '//*[@id="main-menu-wrapper"]/ul/li[7]/a/span[2]').click()
 time.sleep(2)
-driver.find_element("xpath", '//*[@id="main-menu"]')
-driver.execute_script("window.scrollTo(0,300, document.body.scrollHeight);")
+navegador.find_element("xpath", '//*[@id="main-menu"]')
+navegador.execute_script("window.scrollTo(0,300, document.body.scrollHeight);")
 time.sleep(2)
-driver.find_element("xpath", '//*[@id="main-menu-wrapper"]/ul/li[7]/ul/li[6]/a').click()
-time.sleep(10)
-for caso in range(754):
-    driver.find_element("xpath", '//*[@id="leg0"]').click()
+navegador.find_element("xpath", '//*[@id="main-menu-wrapper"]/ul/li[7]/ul/li[6]/a').click()
+time.sleep(20)
+
+for caso in range(753):
+    navegador.find_element("xpath", '//*[@id="leg0"]').click()
     time.sleep(2)
-    driver.find_element("xpath", '/html/body/div[5]/div[4]/div/div[4]/div/div/div/div[2]/div[1]/div/a[1]/button').click()
+    navegador.find_element("xpath", '//*[@id="tab-notas-com-erro"]/div/div[2]/div[1]/div/a[1]/button').click()
     time.sleep(5)
-    driver.find_element("xpath", '//*[@id="btnOkAlertEdp"]').click()
+    navegador.find_element("xpath", '//*[@id="btnOkAlertEdp"]').click()
     print(caso)
     time.sleep(120)
